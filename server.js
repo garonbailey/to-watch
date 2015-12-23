@@ -3,7 +3,11 @@ var express        = require('express'),
 	bodyParser     = require('body-parser'),
 	methodOverride = require('method-override'),
 	mongoose       = require('mongoose'),
-	Schema         = mongoose.Schema;
+	Schema         = mongoose.Schema,
+	PORT           = process.env.PORT || 3000,
+	MONGOURI       = process.env.MONGOLAB_URI || "mongodb://localhost:27017",
+	dbname         = "towatch",
+	session        = require('express-session');
 
 // Mongoose
 
@@ -22,6 +26,11 @@ var User = mongoose.model('User', userSchema);
 
 //Server Usage and Settings
 
+server.use(session({
+	secret: "watchinStuffs",
+	resave: false,
+	saveUninitialized: true
+}));
 server.use(express.static('./public'));
 server.use(bodyParser.urlencoded({ extended: true }));
 server.use(bodyParser.json());
@@ -47,7 +56,7 @@ server.get('*', function(req, res) {
 
 //DB and Server Listen
 
-mongoose.connect('mongodb://localhost:27017/towatch');
-server.listen(3000, function () {
-	console.log("Just your old pal, waiting on Port 3000");
+mongoose.connect(MONGOURI + "/" + dbname);
+server.listen(PORT, function () {
+	console.log("Just your old pal, waiting on Port ", PORT);
 });
