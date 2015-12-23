@@ -10,6 +10,28 @@ body {
 	text-align: center;
 }
 
+a {
+	text-decoration: none;
+	color: red;
+}
+
+a:hover {
+	text-decoration: underline;
+	color: #111;
+}
+
+header {
+	width: 100vw;
+	height: 13vh;
+	background: red;
+	color: #111;
+	border-bottom: 2vh solid #111;
+}
+
+header a {
+	color: #111;
+}
+
 footer {
 	position: absolute;
 	bottom: 0;
