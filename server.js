@@ -8,9 +8,14 @@ var express        = require('express'),
 // Mongoose
 
 var userSchema = new Schema({
-	username: ,
-	password: ,
-	movie_list: ,
+	username: { type: String, required: true, unique: true },
+	password: { type: String, required: true },
+	list: [{ 
+		title: String, 
+		year: String, 
+		img: String, 
+		imdb: String 
+	}]
 });
 
 var User = mongoose.model('User', userSchema);
@@ -25,7 +30,7 @@ server.use(methodOverride('_method'));
 // server gets and posts
 
 server.get('/user', function (req, res) {
-
+	User.findOne()
 });
 
 server.post('/user', function (req, res) {

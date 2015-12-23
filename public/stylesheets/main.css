@@ -5,5 +5,10 @@
 }
 
 body {
-	
+	background: floralwhite;
+	color: red;
+}
+
+.top > div {
+	display: inline-block;
 }
