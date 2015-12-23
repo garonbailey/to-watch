@@ -7,6 +7,14 @@
 body {
 	background: floralwhite;
 	color: red;
+	text-align: center;
+}
+
+footer {
+	position: absolute;
+	bottom: 0;
+	left: 40vw;
+	right: 40vw;
 }
 
 .top > div {
