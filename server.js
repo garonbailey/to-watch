@@ -38,8 +38,15 @@ server.use(methodOverride('_method'));
 
 // server gets and posts
 
-server.get('/users', function (req, res) {
-	User.findOne()
+server.get('/users/:username', function (req, res) {
+	var user = req.params.username;
+	User.findOne( { username: user }, function (err, currentUser) {
+		if (err) {
+			res.json(err)
+		} else {
+			res.json(currentUser)
+		}
+	});
 });
 
 server.post('/users', function (req, res) {
