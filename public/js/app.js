@@ -29,7 +29,16 @@ app.controller('signupCtrl', ['$routeParams', '$http', function ($routeParams, $
 }]);
 
 app.controller('searchCtrl', ['$routeParams', '$http', function ($routeParams, $http) {
+	var ctrl = this;
+	var searchResults;
 
+	this.search = function () {
+		$http.get('http://www.omdbapi.com/?s=' + ctrl.searchString)
+			.success(function (data) {
+				searchResults = data.Search;
+				console.log(searchResults);
+			});
+	}
 }]);
 
 app.controller('userCtrl', ['$routeParams', '$http', '$scope', function ($routeParams, $http, $scope) {
