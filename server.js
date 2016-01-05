@@ -18,7 +18,8 @@ var userSchema = new Schema({
 		title: String, 
 		year: String, 
 		img: String, 
-		imdb: String 
+		imdb: String,
+		added: { type: Date, required: true, default: Date.now }
 	}]
 });
 
@@ -38,20 +39,95 @@ server.use(methodOverride('_method'));
 
 // server gets and posts
 
+server.post('/sessions', function (req, res) {
+
+});
+
+server.get('/users', function (req, res) {
+	User.find({}, function (err, users) {
+		if (err) {
+			console.log("Error getting user list: ", users);
+		} else {
+			res.json({users: users});
+		}
+	});
+});
+
 server.get('/users/:username', function (req, res) {
 	var user = req.params.username;
+	console.log("user from params: ", user);
 	User.findOne( { username: user }, function (err, currentUser) {
 		if (err) {
 			res.json(err)
 		} else {
-			res.json(currentUser)
+			res.json({currentUser: currentUser});
+			console.log("User on the Server side: ", currentUser);
 		}
 	});
 });
 
 server.post('/users', function (req, res) {
-
+	var newUser = new User(req.body.user);
+	newUser.list = [];
+	newUser.save(function (err, user) {
+		if (err) {
+			console.log("Error creating user: ", err);
+		} else {
+			res.json({
+				createdUser: user
+			});
+		}
+	});
 });
+
+server.patch('/users/:username', function (req, res) {
+	var user = req.params.username;
+	var film = req.body.film;
+	User.findOne( { username: user }, function (err, currentUser) {
+		if (err) {
+			res.json(err)
+		} else {
+			currentUser.list.push({ film });
+			currentUser.save(function (updateErr) {
+				if (!updateErr) {
+					console.log("Movie added");
+					res.json(currentUser);
+				}
+			});
+		}
+	});
+});
+
+// server.remove('/users/:username', function (req, res) {
+// 	var user = req.params.username;
+// 	var film = req.body.film;
+// 	User.findOne( { username: user }, function (err, currentUser) {
+// 		if (err) {
+// 			res.json(err)
+// 		} else {
+// 			currentUser.list.title(film.title).remove();
+// 			currentUser.save(function (updateErr) {
+// 				if (!updateErr) {
+// 					console.log("Movie removed");
+// 					res.json(currentUser);
+// 				}
+// 			});
+// 		}
+// 	});
+// });
+
+server.delete('/users/:username', function (req, res) {
+	var user = req.params.username;
+	User.findOneAndRemove({ username: user }, function (err, userToRemove) {
+		if (err) {
+			res.json(err)
+		} else {
+			res.json({
+				message: "Goodbye, Space Cowboy"
+			});
+		}
+	});
+})
 
 
 // App render

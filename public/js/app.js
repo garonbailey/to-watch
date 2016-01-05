@@ -3,14 +3,10 @@ var app = angular.module('ToWatch', ['ngRoute']);
 app.controller('getUserCtrl', ['$routeParams', '$http', function ($routeParams, $http) {
 	var ctrl = this;
 
-	// this.getUser = function () {
-	// 	$http.get('/user')
-	// 		.then(function success (res) {
-
-	// 		}, function error (res) {
-
-	// 		});
-	// };
+	$http.get('/users')
+		.success(function (data) {
+			ctrl.users = data.users;
+		});
 }]);
 
 app.controller('loginCtrl', ['$routeParams', '$http', function ($routeParams, $http) {
@@ -25,7 +21,10 @@ app.controller('signupCtrl', ['$routeParams', '$http', function ($routeParams, $
 	var ctrl = this;
 
 	this.signup = function () {
-
+		$http.post('/users', { user: ctrl.user })
+			.success( function (data) {
+				data.user;
+			});
 	};
 }]);
 
@@ -33,8 +32,14 @@ app.controller('searchCtrl', ['$routeParams', '$http', function ($routeParams, $
 
 }]);
 
-app.controller('userCtrl', ['$routeParams', '$http', function ($routeParams, $http) {
-
+app.controller('userCtrl', ['$routeParams', '$http', '$scope', function ($routeParams, $http, $scope) {
+	var ctrl = this;
+	var userProfile = $routeParams.username;
+	$http.get('/users/' + userProfile)
+		.success(function (data) {
+			ctrl.user = data.currentUser;
+			console.log("User: ", data.currentUser);
+		});
 }]);
 
 app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
@@ -60,7 +65,7 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
 			controller: 'searchCtrl',
 			controllerAs: 'ctrl'
 		}).
-		when('/profile', {
+		when('/users/:username', {
 			templateUrl: 'views/profile.html',
 			controller: 'userCtrl',
 			controllerAs: 'ctrl'

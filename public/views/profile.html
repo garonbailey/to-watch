@@ -1,11 +1,26 @@
-<div class="top">
-	<h3>Username will go here: {{user.username}}</h3>
-	<ul>
-		<li><a href="/search">Search</a></li>
-		<li><a href="/logout">Log Out</a></li>
-	</ul>
-</div>
+<div ng-controller="userCtrl">
+	<div class="top">
+		<h3>Username will go here: {{ctrl.user.username}}</h3>
+		<ul>
+			<li><a href="/search">Search</a></li>
+			<li><a href="/logout">Log Out</a></li>
+		</ul>
+	</div>
 
-<div class="list">
-	<p>The movie list will go here</p>
+	<div class="list">
+		<p>{{ctrl.user.username}}'s list will go here</p>
+		<ul>
+			<li ng-repeat="movie in ctrl.user.list">
+				<ul>
+					<li><a href="http://imdb.com/title/{{movie.imdb}}">{{movie.title}}</a></li>
+					<li>{{movie.year}}</li>
+					<li>Date Added: {{movie.added}}</li>
+				</ul>
+				<form ng-submit="ctrl.remove()">
+					<input type="hidden" ng-model="ctrl.film.title" value="{{movie.title}}">
+					<input type="submit" value="Watched?">
+				</form>
+			</li>
+		</ul>
+	</div>
 </div>
