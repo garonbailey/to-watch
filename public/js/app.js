@@ -33,11 +33,20 @@ app.controller('searchCtrl', ['$routeParams', '$http', function ($routeParams, $
 	var searchResults;
 
 	this.search = function () {
-		$http.get('http://www.omdbapi.com/?s=' + ctrl.searchString)
-			.success(function (data) {
-				searchResults = data.Search;
-				console.log(searchResults);
-			});
+		$http({
+		  method: 'GET',
+		  url: 'http://www.omdbapi.com/?s=' + ctrl.searchString
+		}).then(function successCallback(res) {
+			    ctrl.searchResults = res.data.Search;
+				console.log(ctrl.searchResults);
+		  }, function errorCallback(res) {
+		    	res.json({ message: "Search Error"});
+		  });
+	}
+
+	this.addMovie = function () {
+		var newItem = ctrl.listItem;
+		console.log(ctrl.newItem);
 	}
 }]);
 
