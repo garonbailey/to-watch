@@ -33,11 +33,16 @@ header a {
 	color: #111;
 }
 
+main {
+	margin-bottom: 1.5rem;
+}
+
 footer {
-	position: absolute;
+	width: 100vw;
+	height: 1.25rem;
+	position: fixed;
+	background: #eee;
 	bottom: 0;
-	left: 40vw;
-	right: 40vw;
 }
 
 .top > div {
