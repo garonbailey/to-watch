@@ -28,7 +28,7 @@ app.controller('signupCtrl', ['$routeParams', '$http', function ($routeParams, $
 	};
 }]);
 
-app.controller('searchCtrl', ['$routeParams', '$http', function ($routeParams, $http) {
+app.controller('searchCtrl', ['$routeParams', '$http', '$scope', function ($routeParams, $http, $scope) {
 	var ctrl = this;
 	var searchResults;
 
@@ -44,9 +44,13 @@ app.controller('searchCtrl', ['$routeParams', '$http', function ($routeParams, $
 		  });
 	}
 
-	this.addMovie = function () {
-		var newItem = ctrl.listItem;
-		console.log(ctrl.newItem);
+	this.addMovie = function (itemTitle, itemID, itemYear, itemImg) {
+		var newItem = {};
+		newItem.title = itemTitle;
+		newItem.imdb = itemID;
+		newItem.year = itemYear;
+		newItem.img = itemImg;
+		console.log(newItem);
 	}
 }]);
 
