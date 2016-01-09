@@ -17,7 +17,6 @@ app.controller('loginCtrl', ['$routeParams', '$http', function ($routeParams, $h
 			.success(function (data) {
 				data.user;
 				ctrl.message = data.message;
-				console.log(data);
 			});
 	};
 }]);
