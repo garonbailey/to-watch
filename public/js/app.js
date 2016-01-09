@@ -16,6 +16,8 @@ app.controller('loginCtrl', ['$routeParams', '$http', function ($routeParams, $h
 		$http.post('/sessions', { user: ctrl.user })
 			.success(function (data) {
 				data.user;
+				ctrl.message = data.message;
+				console.log(data);
 			});
 	};
 }]);
@@ -25,7 +27,7 @@ app.controller('signupCtrl', ['$routeParams', '$http', function ($routeParams, $
 
 	this.signup = function () {
 		$http.post('/users', { user: ctrl.user })
-			.success( function (data) {
+			.success(function (data) {
 				data.user;
 			});
 	};

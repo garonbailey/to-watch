@@ -46,7 +46,7 @@ server.post('/sessions', function (req, res) {
 			res.json(err);
 		} else {
 			if (loginUser.password !== checkUser.password) {
-				console.log("Username/password combo incorrect");
+				res.send({message: "Username/password combo incorrect"});
 			} else {
 				console.log("current user is: ", checkUser);
 				console.log("user confirmation: ", loginUser);
