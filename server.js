@@ -40,7 +40,19 @@ server.use(methodOverride('_method'));
 // server gets and posts
 
 server.post('/sessions', function (req, res) {
-
+	var checkUser = req.body.user;
+	User.findOne({ username: checkUser.username }, function (err, loginUser) {
+		if (err) {
+			res.json(err);
+		} else {
+			if (loginUser.password !== checkUser.password) {
+				console.log("Username/password combo incorrect");
+			} else {
+				console.log("current user is: ", checkUser);
+				console.log("user confirmation: ", loginUser);
+			}
+		}
+	});
 });
 
 server.get('/users', function (req, res) {

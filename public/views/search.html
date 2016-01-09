@@ -11,6 +11,6 @@
 	<li ng-repeat="result in ctrl.searchResults">
 		<a href="http://imdb.com/title/{{result.imdbID}}/">{{result.Title}}</a> ({{result.Year}})<br/>
 		<img src="{{result.Poster}}" width=200px /><br/>
-		<button ng-click="ctrl.addMovie(result.Title, result.imdbID, result.Year, result.Poster)">Add this to your list!</button>
+		<button ng-click="ctrl.addMovie(result.Title, result.imdbID, result.Year, result.Poster)">Add {{result.Title}} to your list!</button>
 	</li>
 </ul>

@@ -13,7 +13,10 @@ app.controller('loginCtrl', ['$routeParams', '$http', function ($routeParams, $h
 	var ctrl = this;
 
 	this.login = function () {
-
+		$http.post('/sessions', { user: ctrl.user })
+			.success(function (data) {
+				data.user;
+			});
 	};
 }]);
 
