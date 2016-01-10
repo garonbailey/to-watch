@@ -48,8 +48,10 @@ server.post('/sessions', function (req, res) {
 			if (loginUser.password !== checkUser.password) {
 				res.send({message: "Username/password combo incorrect"});
 			} else {
+				req.session.user = loginUser.username;
 				console.log("current user is: ", checkUser);
 				console.log("user confirmation: ", loginUser);
+				res.send({loggedInUser: req.session.user});
 			}
 		}
 	});

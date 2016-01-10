@@ -16,7 +16,8 @@ app.controller('loginCtrl', ['$routeParams', '$http', function ($routeParams, $h
 		$http.post('/sessions', { user: ctrl.user })
 			.success(function (data) {
 				data.user;
-				ctrl.message = data.message;
+				ctrl.loggedInUser = data.loggedInUser;
+				console.log(data);
 			});
 	};
 }]);
