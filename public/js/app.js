@@ -9,15 +9,15 @@ app.controller('getUserCtrl', ['$routeParams', '$http', function ($routeParams, 
 		});
 }]);
 
-app.controller('loginCtrl', ['$routeParams', '$http', function ($routeParams, $http) {
+app.controller('loginCtrl', ['$routeParams', '$http', '$location', function ($routeParams, $http, $location) {
 	var ctrl = this;
 
 	this.login = function () {
 		$http.post('/sessions', { user: ctrl.user })
 			.success(function (data) {
-				data.user;
 				ctrl.loggedInUser = data.loggedInUser;
-				console.log(data);
+				console.log(ctrl.loggedInUser);
+				$location.path('/users/' + ctrl.loggedInUser);
 			});
 	};
 }]);

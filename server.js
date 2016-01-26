@@ -112,7 +112,7 @@ server.patch('/users/:username', function (req, res) {
 	});
 });
 
-// server.remove('/users/:username', function (req, res) {
+// server.delete('/users/:username', function (req, res) {
 // 	var user = req.params.username;
 // 	var film = req.body.film;
 // 	User.findOne( { username: user }, function (err, currentUser) {
