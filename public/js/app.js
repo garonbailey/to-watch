@@ -1,4 +1,4 @@
-var app = angular.module('ToWatch', ['ngRoute', 'ngCookies']);
+var app = angular.module('ToWatch', ['ngRoute']);
 
 app.controller('getUserCtrl', ['$routeParams', '$http', function ($routeParams, $http) {
 	var ctrl = this;
