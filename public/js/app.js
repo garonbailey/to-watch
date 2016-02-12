@@ -1,4 +1,10 @@
-var app = angular.module('ToWatch', ['ngRoute']);
+var app = angular.module('ToWatch', ['ngRoute', 'ngStorage']);
+
+app.controller('storageCtrl', ['$scope', '$localStorage', function ($scope, $localStorage, $sessionStorage) {
+		$scope.$storage = $localStorage.$default({
+			loggedIn: ""
+		});
+}]);
 
 app.controller('getUserCtrl', ['$routeParams', '$http', function ($routeParams, $http) {
 	var ctrl = this;
