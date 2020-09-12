@@ -17,6 +17,6 @@
     "express-session": "^1.12.1",
     "method-override": "^2.3.5",
     "mongodb": "^2.0.52",
-    "mongoose": "^4.3.3"
+    "mongoose": "^5.10.5"
   }
 }
