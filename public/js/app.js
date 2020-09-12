@@ -1,7 +1,7 @@
 var app = angular.module('ToWatch', ['ngRoute', 'ngStorage']);
 
-app.controller('storageCtrl', ['$scope', '$localStorage', function ($scope, $localStorage, $sessionStorage) {
-		$scope.$storage = $localStorage.$default({
+app.controller('storageCtrl', ['$scope', '$rootScope', '$localStorage', function ($scope, $rootScope, $localStorage, $sessionStorage) {
+		$rootScope.$storage = $localStorage.$default({
 			loggedIn: ""
 		});
 }]);

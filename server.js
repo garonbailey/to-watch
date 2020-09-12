@@ -9,8 +9,9 @@ var express        = require('express'),
 	dbname         = "towatch",
 	session        = require('express-session');
 
-// Mongoose
+// Mongoose Schemas
 
+// testUser#, 'password' for testing purposes
 var userSchema = new Schema({
 	username: { type: String, required: true, unique: true },
 	password: { type: String, required: true },
